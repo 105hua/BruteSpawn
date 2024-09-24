@@ -1,4 +1,4 @@
-name: PaperPluginTemplateJava
+name: BruteSpawn
 version: '1.0-SNAPSHOT'
-main: joshdev.paperPluginTemplateJava.PaperPluginTemplateJava
+main: joshdev.brutespawn.BruteSpawn
 api-version: '1.21'

@@ -1,22 +1,32 @@
 /* Licensed under the <LICENSE> */
-package joshdev.paperPluginTemplateJava;
+package joshdev.brutespawn;
 
 import io.papermc.paper.command.brigadier.CommandSourceStack;
-import joshdev.paperPluginTemplateJava.commands.ExampleCommand;
-import joshdev.paperPluginTemplateJava.event.OnPlayerJoin;
+import joshdev.brutespawn.commands.ReloadCommand;
+import joshdev.brutespawn.event.OnCreatureSpawn;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.annotations.AnnotationParser;
 import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.PaperCommandManager;
 
-public final class PaperPluginTemplateJava extends JavaPlugin {
+public final class BruteSpawn extends JavaPlugin {
 
-  public static PaperPluginTemplateJava pluginInstance;
+  public static BruteSpawn pluginInstance;
   public static PaperCommandManager<CommandSourceStack> commandManager;
   public static AnnotationParser<CommandSourceStack> annotationParser;
+  public static int spawnChance;
 
   @Override
   public void onEnable() {
+    // Save the config in the jar.
+    saveDefaultConfig();
+    // Load the spawn chance from the config.
+    try {
+      spawnChance = getConfig().getInt("spawn-chance");
+    } catch (Exception e) {
+      getLogger().warning("Error loading config, using default spawn chance of 20.");
+      spawnChance = 20;
+    }
     // Defines a variable of the plugin that can be accessed in other classes.
     pluginInstance = this;
     // Creates the command manager and annotation parser.
@@ -25,10 +35,8 @@ public final class PaperPluginTemplateJava extends JavaPlugin {
             .executionCoordinator(ExecutionCoordinator.simpleCoordinator())
             .buildOnEnable(this);
     annotationParser = new AnnotationParser<>(commandManager, CommandSourceStack.class);
-    // Parse the example command with our annotation parser.
-    annotationParser.parse(new ExampleCommand());
-    // Register the player join event.
-    getServer().getPluginManager().registerEvents(new OnPlayerJoin(), this);
+    annotationParser.parse(new ReloadCommand());
+    getServer().getPluginManager().registerEvents(new OnCreatureSpawn(), this);
     // Log that the plugin has been enabled.
     getLogger().info("Plugin has been enabled!");
   }
