@@ -75,7 +75,7 @@ spotless{
         importOrder()
         googleJavaFormat()
         formatAnnotations()
-        licenseHeader("/* Licensed under the <LICENSE> */")
+        licenseHeader("/* Licensed under the GNU General Public License v3.0 */")
     }
     runServer{
         minecraftVersion("1.21.1")

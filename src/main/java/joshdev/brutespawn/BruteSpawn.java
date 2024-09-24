@@ -1,4 +1,4 @@
-/* Licensed under the <LICENSE> */
+/* Licensed under the GNU General Public License v3.0 */
 package joshdev.brutespawn;
 
 import io.papermc.paper.command.brigadier.CommandSourceStack;
