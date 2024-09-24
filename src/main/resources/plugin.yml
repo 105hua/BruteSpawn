@@ -1,0 +1,4 @@
+name: PaperPluginTemplateJava
+version: '1.0-SNAPSHOT'
+main: joshdev.paperPluginTemplateJava.PaperPluginTemplateJava
+api-version: '1.21'
